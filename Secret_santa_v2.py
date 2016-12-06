@@ -1,7 +1,9 @@
 from random import randint
 import smtplib
+import getpass
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+
 from Santa_Values import participants, email_or_text
 
 
@@ -14,18 +16,24 @@ from Santa_Values import participants, email_or_text
 restrictions = []
 worked = False
 
-def send_email():
-	fromaddr = input("Please enter the email address you would like to send emails from: ")
-	frompassword = input("Please enter the password for the email address you are sending from: ")
+max_price = input("Please enter the maximum amount you would like your participants to spend on each other: $")
+gift_exchange_date = input("Please enter the date you would like to exchange gifts (in whatever format you choose): " )
 
-	for email, giftee in santa_matches.items():
+
+
+def send_email():
+	fromaddr = input("------------\nPlease enter the email address you would like to send emails from: ")
+	frompassword = getpass.getpass("Please enter the password for the email address you are sending from: ")
+	subject = input("What is the title for your emails? ")
+
+	for email, people in santa_matches.items():
 		toaddr = email
 		msg = MIMEMultipart()
 		msg['From'] = fromaddr
 		msg['To'] = toaddr
-		msg['Subject'] = "Secret Santa"
+		msg['Subject'] = subject
 		 
-		body = "Personal message: Here's your person to buy for: {}".format(giftee)
+		body = "Happy holidays, {}! Your secret santa assignment is to get a present for {}. In order to keep things fair, please spend ${} or less. Secret santa gift exchange will occur on {}.".format(people[0], people[1], max_price, gift_exchange_date)
 		msg.attach(MIMEText(body, 'plain'))
 
 		message = msg.as_string()
@@ -70,3 +78,4 @@ while worked == False:
 		worked = True
 
 print(santa_matches)
+send_email()
