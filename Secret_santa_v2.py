@@ -4,7 +4,7 @@ import getpass
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-from Santa_Values import participants, email_or_text
+from Santa_Values import participants, email_or_text, restrictions
 
 
 '''In order to use this tool, please first create a spreadsheet in google drive. The spreadshet will need to have three columns: Name, Email, and Restrictions.  
@@ -16,7 +16,6 @@ from Santa_Values import participants, email_or_text
 
 '''Please note that if you choose the email, you will be prompted to enter your email and password, which will be used to (securely) send emails through your email. If you are using gmail, you will have to turn on the setting to allow less secure apps.'''
 
-restrictions = []
 worked = False
 
 max_price = input("\nPlease enter the maximum amount you would like your participants to spend on each other: $")
@@ -55,8 +54,7 @@ def send_email():
 			break
 		
 
-for person in participants:
-	restrictions.append([person])
+
 while worked == False:
 	santa_matches = {}
 	choose_from = []

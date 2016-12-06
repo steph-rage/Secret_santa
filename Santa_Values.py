@@ -51,9 +51,8 @@ def main():
 
     global email_or_text
     def get_spreadsheet_Id():
-        global spreadsheetId 
         print("\nTo start, we need the ID for your spreadsheet, which can be found in its URL.\n\nFor example, the spreadsheet located at: https://docs.google.com/spreadsheets/d/17c6b5twbL0lRo1aID6nd3nnNGjsBfNq6Q5GAVlQ3B4s/edit#gid=0\n\nHas the ID: 17c6b5twbL0lRo1aID6nd3nnNGjsBfNq6Q5GAVlQ3B4s\n")
-        spreadsheetId = input("Please enter the ID of your spreadsheet: ").strip()
+        return input("Please enter the ID of your spreadsheet: ").strip()
 
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
@@ -63,9 +62,8 @@ def main():
                               discoveryServiceUrl=discoveryUrl)
 
 
-    get_spreadsheet_Id()
-    spreadsheetId = '17c6b5twbL0lRo1aID6nd3nnNGjsBfNq6Q5GAVlQ3B4s'
-    rangeName = 'Sheet1!A2:E'
+    spreadsheetId = get_spreadsheet_Id()
+    rangeName = 'Sheet1!A2:D'
     try:
         check_column_1 = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='Sheet1!A1').execute()
         check_column_2 = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='Sheet1!B1').execute()
@@ -89,7 +87,16 @@ def main():
 
 participants_list = main()
 participants = {}
+restrictions = []
 for person in participants_list:
+    try:
+        person[2].replace(",", "")
+        personal_restrictions = person[2].split(' ')
+        personal_restrictions.append(person[0])
+        restrictions.append(personal_restrictions)
+    except:
+        pass
     participants[person[0]] = person[1]
+
 
 
