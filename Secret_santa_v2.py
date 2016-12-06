@@ -13,6 +13,9 @@ from Santa_Values import participants, email_or_text
 
 	Once your participants have all filled out their information in your spreadsheet, you are ready to run the code!'''
 
+
+'''Please note that if you choose the email, you will be prompted to enter your email and password, which will be used to (securely) send emails through your email. If you are using gmail, you will have to turn on the setting to allow less secure apps.'''
+
 restrictions = []
 worked = False
 
@@ -38,15 +41,18 @@ def send_email():
 
 		message = msg.as_string()
 
-		
-		s = smtplib.SMTP('smtp.gmail.com', 587)
-		s.ehlo()
-		s.starttls()
-		s.ehlo()
-		s.login(fromaddr, frompassword)
-		s.sendmail(fromaddr, toaddr, message)
-		s.close()
-		print('email sent to {}'.format(email))
+		try:
+			s = smtplib.SMTP('smtp.gmail.com', 587)
+			s.ehlo()
+			s.starttls()
+			s.ehlo()
+			s.login(fromaddr, frompassword)
+			s.sendmail(fromaddr, toaddr, message)
+			s.close()
+			print('email sent to {}'.format(email))
+		except smtplib.SMTPAuthenticationError:
+			print("------------\nUh-oh! It looks like we are having trouble accessing your email. If you have a gmail account, you'll need to go to My Account -> Sign-in and Security, then scroll down and change 'Allow less secure apps' to 'On'. Please do this and try again.\n")
+			break
 		
 #def send_text():
 
