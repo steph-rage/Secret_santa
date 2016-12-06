@@ -7,7 +7,7 @@ from email.mime.text import MIMEText
 from Santa_Values import participants, email_or_text
 
 
-'''In order to use this tool, please first create a spreadsheet in google drive. The spreadshet will need to have three columns: Name, Email or Phone Number, and Restrictions. Please choose if you would like to contact your participants by sending a personal email or a text message, and title your column accordingly. 
+'''In order to use this tool, please first create a spreadsheet in google drive. The spreadshet will need to have three columns: Name, Email, and Restrictions.  
 	
 	Anything your participants put in the third column will be treated as excpetions. For example, if you would like people to avoid picking their significant other or their immediate family members, they should type that person's (those people's) name(s) in this column. The title of the third column is up to you, and feel free to leave it blank if this does not apply to your group. 
 
@@ -19,7 +19,7 @@ from Santa_Values import participants, email_or_text
 restrictions = []
 worked = False
 
-max_price = input("Please enter the maximum amount you would like your participants to spend on each other: $")
+max_price = input("\nPlease enter the maximum amount you would like your participants to spend on each other: $")
 gift_exchange_date = input("Please enter the date you would like to exchange gifts (in whatever format you choose): " )
 
 
@@ -54,8 +54,6 @@ def send_email():
 			print("------------\nUh-oh! It looks like we are having trouble accessing your email. If you have a gmail account, you'll need to go to My Account -> Sign-in and Security, then scroll down and change 'Allow less secure apps' to 'On'. Please do this and try again.\n")
 			break
 		
-#def send_text():
-
 
 for person in participants:
 	restrictions.append([person])
@@ -83,5 +81,4 @@ while worked == False:
 	if len(santa_matches) == len(participants):
 		worked = True
 
-print(santa_matches)
 send_email()
