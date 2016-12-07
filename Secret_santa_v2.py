@@ -6,16 +6,6 @@ from email.mime.text import MIMEText
 
 from Santa_Values import participants, email_or_text, restrictions
 
-
-'''In order to use this tool, please first create a spreadsheet in google drive. The spreadshet will need to have three columns: Name, Email, and Restrictions.  
-	
-	Anything your participants put in the third column will be treated as excpetions. For example, if you would like people to avoid picking their significant other or their immediate family members, they should type that person's (those people's) name(s) in this column. The title of the third column is up to you, and feel free to leave it blank if this does not apply to your group. 
-
-	Once your participants have all filled out their information in your spreadsheet, you are ready to run the code!'''
-
-
-'''Please note that if you choose the email, you will be prompted to enter your email and password, which will be used to (securely) send emails through your email. If you are using gmail, you will have to turn on the setting to allow less secure apps.'''
-
 worked = False
 
 max_price = input("\nPlease enter the maximum amount you would like your participants to spend on each other: $")
