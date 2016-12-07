@@ -13,8 +13,32 @@ except ImportError:
     flags = None
 
 
+# What permissions to request from the Google API.
 SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
-PARTICIPANT_FILE = 'participants.json'
+
+# Where to find the client_secrets.json formatted file.
+#
+# If you don't have this file already, you need to generate one for
+# your copy of this app. This is free. The process is:
+#
+# 1. Go to https://console.developers.google.com/
+#
+# 2. Create a new Project.
+#
+# 3. Obtain an OAuth client ID from the "Credentials" section:
+#    https://console.developers.google.com/apis/credentials
+#
+# 4. Download the JSON file for the new credentials, and save
+#    the file as `client_secrets.json` in the same folder as
+#    this file is in.
+#
+# See the following Google Developer guides for more information:
+#     https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
+#     https://developers.google.com/identity/protocols/OAuth2?csw=1#CS
+#
+CLIENT_SECRETS_FILE = 'client_secrets.json'
+
+# The name of this app that the OAuth authorization flow should show to a user.
 APPLICATION_NAME = 'Secret Santa'
 
 
@@ -37,7 +61,7 @@ def get_credentials():
     store = Storage(credential_path)
     credentials = store.get()
     if not credentials or credentials.invalid:
-        flow = client.flow_from_clientsecrets(PARTICIPANT_FILE, SCOPES)
+        flow = client.flow_from_clientsecrets(CLIENT_SECRETS_FILE, SCOPES)
         flow.user_agent = APPLICATION_NAME
         if flags:
             credentials = tools.run_flow(flow, store, flags)
