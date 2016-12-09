@@ -1,5 +1,7 @@
 # Secret Santa!
 
+Secret Santa is a simple Python script that sends emails to participants in a "Secret Santa" style gift exchange pool. The participants in the pool are defined in a Google Spreadsheet so the participants can add, remove, or edit their own email address and other preferences. :)
+
 # Configure
 
 In order to use this tool, please first create a spreadsheet in Google Drive. The spreadshet will need to have at least two columns, with the exact headings:
@@ -25,6 +27,20 @@ virtualenv santa                                         # Create a virtual envi
 source ./santa/bin/activate                              # Activate the virtual environment.
 pip install -r requirements.txt                          # Install dependencies.
 ```
+
+Next, you will need to obtain OAuth 2.0 client credentials from your own Google Account's Developer Console and save these credentials in a file called `client_secrets.json`.
+
+**Do this:**
+
+1. Go to the [Google Developers API Console](https://console.developers.google.com/).
+1. Create a new Project.
+1. Obtain an OAuth client ID from [the "Credentials" section](https://console.developers.google.com/apis/credentials)
+1. Download the JSON file for the new credentials, and save the file as `client_secrets.json` in the same folder as this file is in.
+
+See the following Google Developer guides for more information:
+
+* [Client Secrets | API Client Library for Python | Google Developers](https://developers.google.com/api-client-library/python/guide/aaa_client_secrets)
+* [Using OAuth 2.0 to Access Google APIs | Google Identity Platform | Google Developers](https://developers.google.com/identity/protocols/OAuth2?csw=1#CS)
 
 # Running
 
