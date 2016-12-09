@@ -1,2 +1,5 @@
 __pycache__/
 quickstart.py
+
+# Installation-specific OAuth 2.0 client ID and secrets file.
+client_secrets.json
